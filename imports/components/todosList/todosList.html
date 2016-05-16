@@ -1,0 +1,34 @@
+<header>
+  <h1>Simple Blogger</h1>  
+  <login-buttons></login-buttons><br/>
+  <fieldset>
+	  <legend>Create New Post:</legend>
+		  <form class="new-task"  ng-show="$ctrl.currentUser"  ng-submit="$ctrl.addTask($ctrl.newTask,$ctrl.title)">
+				<input ng-model="$ctrl.title" type="text" name="title" placeholder="Enter title of Post here"/>
+				<input ng-model="$ctrl.newTask" type="text" name="text" placeholder="Enter post content here"/>
+				<input type="submit" id="login-buttons" name="submit"  />
+		  </form>
+  </fieldset>
+</header>
+ 
+<ul>
+  <li ng-repeat="task in $ctrl.tasks" ng-class="{'checked': task.checked}" class="div">
+    <button class="delete" ng-click="$ctrl.removeTask(task)">&times;</button>
+	<button class="edit" ng-click = "edit = !edit">&#33;</button>
+	<div ng-show="edit" id = "editForm">
+		<form  ng-submit="$ctrl.updateTask(task,$ctrl.Task,$ctrl.title)">
+			<input ng-model="$ctrl.title" type="text" name="title"  placeholder="{{task.title}}" />
+			<input ng-model="$ctrl.Task" type="text" name="text" placeholder="{{task.text}}" />
+			<input type="submit" id="login-buttons" name="submit"  />
+	  </form>
+	  <br/>
+  </div>
+  
+    <input type="checkbox" ng-checked="task.checked" ng-click="$ctrl.setChecked(task)" class="toggle-checked"/>
+ 
+    <span class="text">
+      CreatedBy: {{task.username}}-{{task.createdAt | date: 'medium'}}<br/><span class="title">Title:
+	  </span> {{task.title}}<br/><span class="post">Post:</span> {{task.text}}
+    </span>
+  </li>
+</ul>
